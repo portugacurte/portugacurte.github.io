@@ -15,7 +15,7 @@ portugAcurteApp.controller('mainController', function($scope, $location) {
     $scope.token = $location.search().access_token;
 
     $scope.login = function(){
-        var url = "https://api.instagram.com/oauth/authorize/?client_id=" + $scope.clientId + "&redirect_uri=https://portugacurte.github.io&response_type=token"
+        var url = "https://api.instagram.com/oauth/authorize/?client_id=" + $scope.clientId + "&redirect_uri=https://portugacurte.github.io/index.html&response_type=token"
         window.location = url;
     }
 });
