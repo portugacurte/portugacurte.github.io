@@ -1,5 +1,40 @@
-<html>
-<body>
-<h1>Vamos curtir pra ser curtidos!</h1>
+<html ng-app="portugAcurteApp">
+<head>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+<script>
+var portugAcurteApp = angular.module('portugAcurteApp', ['ngRoute']);
+
+portugAcurteApp.config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
+}); 
+
+portugAcurteApp.controller('mainController', function($scope, $location) {
+    $scope.token = $location.search().token;
+
+    $scope.login = function(){
+        var url = "https://api.instagram.com/oauth/authorize/?client_id=" + $scope.clientId + "&redirect_uri=https://portugacurte.github.io/&response_type=token"
+        window.location = url;
+    }
+});
+
+</script>
+</head>
+<!-- <body ng-view> -->
+<body ng-controller="mainController">
+    <h1>Portuga Curte</h1>
+    
+    <div ng-show="!token">
+        <p>hashtag <input ng-model="hashtag"></p>
+        <p>client id <input ng-model="clientId"><button ng-click="login()">Curte</button></p>
+    </div>
+
+    <div ng-show="token">
+        <p>ja tenho o token - {{token}}</p>
+
+    </div>
+
+
 </body>
 </html>
