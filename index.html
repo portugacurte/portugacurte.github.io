@@ -6,11 +6,26 @@
 <script>
 var portugAcurteApp = angular.module('portugAcurteApp', ['ngRoute']);
 
-portugAcurteApp.config(function($locationProvider) {
+portugAcurteApp.config(function($locationProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
+
+     $routeProvider
+
+            // route for the home page
+            .when('/', {
+                templateUrl : '/login.html',
+                controller  : 'mainController'
+            })
+
+            // route for the about page
+            .when('/tokenized', {
+                templateUrl : '/tokenized.html',
+                controller  : 'mainController'
+            });
+
 }); 
 
-portugAcurteApp.controller('mainController', function($scope, $location) {
+portugAcurteApp.controller('mainController', function($scope, $location, $routeParams) {
     console.log('$location.search()', $location.search());
     $scope.token = $location.search().access_token;
 
@@ -36,6 +51,13 @@ portugAcurteApp.controller('mainController', function($scope, $location) {
 
     </div>
 
-
 </body>
+
+<script type="text/ng-template" id="/login.html">
+  Content of the template.
+</script>
+
+<script type="text/ng-template" id="/tokenized.html">
+  i ve got the token {{token}}
+</script>
 </html>
