@@ -11,6 +11,7 @@ portugAcurteApp.config(function($locationProvider) {
 }); 
 
 portugAcurteApp.controller('mainController', function($scope, $location) {
+    console.log('$location.search()', $location.search());
     $scope.token = $location.search().access_token;
 
     $scope.login = function(){
