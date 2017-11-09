@@ -6,33 +6,33 @@
 <script>
 var portugAcurteApp = angular.module('portugAcurteApp', ['ngRoute']);
 
-portugAcurteApp.config(function($locationProvider, $routeProvider) {
+portugAcurteApp.config(function($locationProvider) {
     $locationProvider.html5Mode(true);
-
-     $routeProvider
-
-            // route for the home page
-            .when('/', {
-                templateUrl : '/login.html',
-                controller  : 'mainController'
-            })
-
-            // route for the about page
-            .when('/tokenized', {
-                templateUrl : '/tokenized.html',
-                controller  : 'mainController'
-            });
-
 }); 
 
-portugAcurteApp.controller('mainController', function($scope, $location, $routeParams) {
+portugAcurteApp.controller('mainController', function($scope, $location, $http) {
     console.log('$location.search()', $location.search());
-    $scope.token = $location.search().access_token;
+    console.log('$location.hash()', $location.hash());
+
+    $scope.token = $location.hash().split("=")[1];
 
     $scope.login = function(){
         var url = "https://api.instagram.com/oauth/authorize/?client_id=" + $scope.clientId + "&redirect_uri=https://portugacurte.github.io/index.html&response_type=token"
         window.location = url;
     }
+
+    function loadTags(){
+        if ($scope.token && $scope.hashtag){
+            var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "?access_token=" + $scope.token;
+            console.log("calling", url);
+            $http.get(url).then(function(){
+                console.log(arguments);
+            });
+        }
+    }
+
+    loadTags();
+
 });
 
 </script>
