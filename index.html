@@ -17,7 +17,7 @@ portugAcurteApp.controller('mainController', function($scope, $location, $http) 
     $scope.token = $location.hash().split("=")[1];
 
     $scope.login = function(){
-        var url = "https://api.instagram.com/oauth/authorize/?client_id=" + $scope.clientId + "&redirect_uri=https://portugacurte.github.io/index.html&response_type=token"
+        var url = "https://api.instagram.com/oauth/authorize/?client_id=" + $scope.clientId + "&redirect_uri=https://portugacurte.github.io/index.html&response_type=token?scope=public_content+likes"
         window.location = url;
     }
 
