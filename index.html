@@ -21,6 +21,10 @@ portugAcurteApp.controller('mainController', function($scope, $location, $http) 
         window.location = url;
     }
 
+    function callbackFunction(data){
+        console.log("callbackFunctio", data, arguments);
+    }
+
     $scope.loadTags = function (){
         if ($scope.token && $scope.hashtag){
             var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "/media/recent?callback=callbackFunction&access_token=" + $scope.token;
