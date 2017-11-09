@@ -23,7 +23,7 @@ portugAcurteApp.controller('mainController', function($scope, $location, $http) 
 
     $scope.loadTags = function (){
         if ($scope.token && $scope.hashtag){
-            var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "/media/recent?access_token=" + $scope.token;
+            var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "/media/recent?callback=callbackFunction&access_token=" + $scope.token;
             console.log("calling", url);
             $http.jsonp(url, {jsonpCallbackParam: 'callback'})
             .success(function(data){
