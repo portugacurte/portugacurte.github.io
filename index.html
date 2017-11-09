@@ -21,14 +21,17 @@ portugAcurteApp.controller('mainController', function($scope, $location, $http) 
         window.location = url;
     }
 
-    function loadTags(){
+    $scope.loadTags = function (){
         if ($scope.token && $scope.hashtag){
             var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "?access_token=" + $scope.token;
             console.log("calling", url);
             $http.get(url).then(function(){
                 console.log(arguments);
             });
+        } else {
+            console.log("no token or hashtag");
         }
+
     }
 
     loadTags();
@@ -42,11 +45,13 @@ portugAcurteApp.controller('mainController', function($scope, $location, $http) 
     <h1>Portuga Curte</h1>
     
     <div ng-show="!token">
-        <p>hashtag <input ng-model="hashtag"></p>
+        
         <p>client id <input ng-model="clientId"><button ng-click="login()">Curte</button></p>
     </div>
 
     <div ng-show="token">
+        <p>hashtag <input ng-model="hashtag"></p> <button ng-click="loadTags()">Pega pra mim</button></p>
+
         <p>ja tenho o token - {{token}}</p>
 
     </div>
