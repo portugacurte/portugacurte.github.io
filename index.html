@@ -23,9 +23,9 @@ portugAcurteApp.controller('mainController', function($scope, $location, $http) 
 
     $scope.loadTags = function (){
         if ($scope.token && $scope.hashtag){
-            var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "?access_token=" + $scope.token;
+            var url = "https://api.instagram.com/v1/tags/" + $scope.hashtag + "?access_token=" + $scope.token + "callback=?";
             console.log("calling", url);
-            $http.get(url).then(function(){
+            $http.jsonp(url).then(function(){
                 console.log(arguments);
             });
         } else {
